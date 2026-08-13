@@ -1,46 +1,5 @@
 "use client"
 
-// export default function(){
-//   return(
-//     <div>
-//       {/* HEADER */}
-//       <header className="fixed top-0 left-0 right-0 z-50 glass">
-//         j
-//       </header>
-
-//       {/* S1 */}
-//       <section className="flex flex-row relative h-screen">
-
-//         <div className="w-1/4 p-4 relative pl-24">
-//         <text className=" text-6xl font-bold absolute top-1/4">
-//           TRANSFORME INFLUENCIA EM ROI REAL
-//         </text>
-//         <p className=" absolute top-2/4">
-//           Potencialize o lucro de marcas e influenciadores através de dados reais, transparência total e métricas que importam.
-//         </p>
-
-//         <button className=" absolute top-3/4 bg-[#e228e2] px-3 py-2 rounded-xl font-bold">
-//           Escalar meu ROI
-//         </button>
-//         </div>
-
-//         <img src="hero-bg.jpg" alt="hero" className="w-3/4 object-cover"/>
-
-//       </section>
-
-//       {/* S2 */}
-
-//       <section className="bg-zinc-800 py-8 ">
-        
-
-//       </section>
-
-//     </div>
-//   )
-// }
-
-
-
 import { motion } from "motion/react";
 import heroBg from "@/assets/hero-bg.jpg";
 import logo from "@/assets/V1 (Roxo)@2x.png";
@@ -293,67 +252,35 @@ const Index = () => {
       <section id="planos" className="min-h-screen flex items-center py-24" style={{ background: 'hsl(0 0% 95%)' }}>
         <div className="container mx-auto px-6">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="text-center mb-16">
-            <motion.span variants={fadeUp} className="font-body text-sm text-primary uppercase tracking-widest">Planos</motion.span>
+            <motion.span variants={fadeUp} className="font-body text-sm text-primary uppercase tracking-widest">Plano</motion.span>
             <motion.h2 variants={fadeUp} className="font-heading text-4xl md:text-5xl font-bold mt-4 text-background">
-              Escolha o plano ideal
+              Um plano sob medida para o seu negócio
             </motion.h2>
+            <motion.p variants={fadeUp} className="font-body text-base text-background/60 mt-4 max-w-xl mx-auto">
+              Sem pacotes engessados. Você conversa com um especialista e monta a estrutura ideal para a sua operação.
+            </motion.p>
           </motion.div>
 
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {/* Basic */}
-            <motion.div variants={fadeUp} className="rounded-2xl p-8 flex flex-col bg-white/70 backdrop-blur-sm border border-black/5 shadow-sm">
-              <h3 className="font-heading text-xl font-bold text-background">Basic</h3>
-              <div className="mt-4 mb-6">
-                <span className="font-heading text-4xl font-bold text-background">R$497</span>
-                <span className="font-body text-sm text-background/60">/mês</span>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-md mx-auto">
+            {/* ROI Elite — plano único sob consulta */}
+            <motion.div variants={fadeUp} className="rounded-2xl p-8 flex flex-col bg-white shadow-xl border-2 border-[#CD9000]/40 relative overflow-hidden">
+              <div className="absolute top-0 right-0 bg-[#CD9000] text-white text-xs font-heading font-bold px-3 py-1 rounded-bl-lg">SOB MEDIDA</div>
+              <h3 className="font-heading text-2xl font-bold text-[#CD9000]">ROI Elite</h3>
+              <div className="mt-4 mb-2">
+                <span className="font-heading text-3xl font-bold text-background">Sob consulta</span>
               </div>
+              <p className="font-body text-sm text-background/60 mb-6">
+                Converse com um de nossos especialistas e monte um plano sob medida para a sua operação.
+              </p>
               <ul className="space-y-3 flex-1">
-                {["300 vendas/mês", "30 influenciadores", "Painel de vendas individual"].map((f) => (
-                  <li key={f} className="flex items-start gap-2 font-body text-sm text-background/70">
-                    <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0"/> {f}
-                  </li>
-                ))}
-              </ul>
-              <a href="#contato" className="mt-8 block text-center border border-primary/30 rounded-lg py-3 font-heading font-medium text-background hover:bg-primary/10 transition-colors">
-                Começar
-              </a>
-            </motion.div>
-
-            {/* ROI Pro */}
-            <motion.div variants={fadeUp} className="rounded-2xl p-8 flex flex-col shadow-lg border-2 border-primary/30 bg-white relative overflow-hidden">
-              <div className="absolute top-0 right-0 bg-primary text-primary-foreground text-xs font-heading font-bold px-3 py-1 rounded-bl-lg">POPULAR</div>
-              <h3 className="font-heading text-xl font-bold text-background">ROI Pro</h3>
-              <div className="mt-4 mb-6">
-                <span className="font-heading text-4xl font-bold text-gradient">R$1.870</span>
-                <span className="font-body text-sm text-background/60">/mês</span>
-              </div>
-              <ul className="space-y-3 flex-1">
-                {["1.500 vendas/mês", "100 influenciadores", "Notificações Push", "2 disparos personalizados/mês", "Painel completo"].map((f) => (
-                  <li key={f} className="flex items-start gap-2 font-body text-sm text-background/70">
-                    <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" /> {f}
-                  </li>
-                ))}
-              </ul>
-              <a href="#contato" className="mt-8 block text-center bg-primary text-primary-foreground rounded-lg py-3 font-heading font-medium hover:opacity-90 transition-opacity">
-                Começar Agora
-              </a>
-            </motion.div>
-
-            {/* Elite */}
-            <motion.div variants={fadeUp} className="rounded-2xl p-8 flex flex-col bg-white/70 backdrop-blur-sm border border-black/5 shadow-sm">
-              <h3 className="font-heading text-xl font-bold text-[#CD9000]">ROI Elite</h3>
-              <div className="mt-4 mb-6">
-                <span className="font-heading text-2xl font-bold text-background">Sob consulta</span>
-              </div>
-              <ul className="space-y-3 flex-1">
-                {["Tudo do Pro", "Benefícios exclusivos", "Suporte prioritário", "Personalização completa"].map((f) => (
+                {["Volume de vendas e influenciadores conforme sua operação", "Notificações push e disparos personalizados", "Painel completo e relatórios de ROI", "Suporte prioritário e onboarding dedicado", "Personalização completa da plataforma"].map((f) => (
                   <li key={f} className="flex items-start gap-2 font-body text-sm text-background/70">
                     <CheckCircle2 className="w-4 h-4 text-[#CD9000] mt-0.5 flex-shrink-0"/> {f}
                   </li>
                 ))}
               </ul>
-              <a href="#contato" className="mt-8 block text-center border border-primary/30 rounded-lg py-3 font-heading font-medium text-background hover:bg-primary/10 transition-colors">
-                Falar com Atendente
+              <a href="#contato" className="mt-8 block text-center bg-[#CD9000] text-white rounded-lg py-3 font-heading font-medium hover:opacity-90 transition-opacity">
+                Falar com um especialista
               </a>
             </motion.div>
           </motion.div>
@@ -408,7 +335,7 @@ const Index = () => {
             </motion.p>
             <motion.a
               variants={fadeUp}
-              href="https://wa.me/"
+              href="https://wa.me/554738424884 "
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-lg font-heading text-lg font-semibold hover:opacity-90 transition-opacity"
@@ -428,6 +355,46 @@ const Index = () => {
               RO<span className="text-primary">Influencer</span>
             </span>
 
+          </div>
+          <div className="flex items-center gap-3">
+            <a
+              href="https://instagram.com/roinfluencer"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram da ROInfluencer"
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
+              <svg
+                className="w-5 h-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
+            </a>
+            <a
+              href="https://linkedin.com/company/roinfluencer"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn da ROInfluencer"
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
+              <svg
+                className="w-5 h-5"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />
+              </svg>
+            </a>
           </div>
           <a href="/politicas-de-privacidade"><p className="font-body text-xs text-muted-foreground">Politicas de Privacidade</p></a>
           <p className="font-body text-xs text-muted-foreground">© 2026 ROINFLUENCER SERVIÇOS DIGITAIS LTDA. All Rights Reserved</p>
