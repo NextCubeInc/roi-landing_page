@@ -1,0 +1,122 @@
+/* Live demo da landing: painel da empresa e app do influenciador lado a lado.
+   Desktop (iframe mais largo que alto): palco fixo 1400×800 escalado pelo live.js.
+   Celular: layout fluido, um app por vez, trocado pelas abas. */
+
+@font-face { font-family: "Inter"; src: url("../fonts/inter-latin-wght-normal.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "IBM Plex Sans"; src: url("../fonts/ibm-plex-sans-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "IBM Plex Sans"; src: url("../fonts/ibm-plex-sans-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "IBM Plex Sans"; src: url("../fonts/ibm-plex-sans-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "IBM Plex Sans"; src: url("../fonts/ibm-plex-sans-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+
+/* tokens da landing (src/app/globals.css) */
+:root {
+  --ld-primary: hsl(300 76% 52%);
+  --ld-glow: hsl(270 60% 40%);
+  --ld-fg: hsl(0 0% 95%);
+  --ld-muted: hsl(0 0% 55%);
+  --ld-card: hsl(0 0% 7%);
+  --ld-border: hsl(0 0% 14%);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: transparent; overflow: hidden; }
+body { font-family: "Inter", system-ui, sans-serif; color: var(--ld-fg); -webkit-font-smoothing: antialiased; }
+button { font: inherit; color: inherit; }
+
+/* ---------- palco ---------- */
+.ld-stage { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 14px; padding: 4px 0 0; }
+.ld-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+.ld-hint { display: none; margin: 0; font-size: 15px; color: var(--ld-muted); }
+.ld-actions { display: flex; gap: 8px; }
+
+.ld-btn {
+  display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; border-radius: 10px; white-space: nowrap;
+  border: 1px solid hsl(300 76% 52% / .3); background: hsl(0 0% 7% / .6); font-size: 14px; font-weight: 600; cursor: pointer;
+  transition: border-color .2s, filter .2s, transform .1s;
+}
+.ld-btn:hover { border-color: var(--ld-primary); }
+.ld-btn:active { transform: scale(.97); }
+.ld-btn:focus-visible, .ld-tabs button:focus-visible { outline: 2px solid var(--ld-primary); outline-offset: 2px; }
+.ld-btn.primary { background: var(--ld-primary); border-color: transparent; color: #fff; box-shadow: 0 0 40px -10px hsl(300 76% 52% / .5); }
+.ld-btn.primary:hover { filter: brightness(1.08); }
+.ld-btn .ic { width: 16px; height: 16px; }
+.ld-dot { width: 8px; height: 8px; border-radius: 99px; background: #34d399; animation: ld-pulse 1.6s infinite; }
+.ld-btn[aria-pressed="false"] .ld-dot { background: #5d676d; animation: none; }
+@keyframes ld-pulse { 0% { box-shadow: 0 0 0 0 rgba(52,211,153,.6); } 70% { box-shadow: 0 0 0 8px rgba(52,211,153,0); } 100% { box-shadow: 0 0 0 0 rgba(52,211,153,0); } }
+
+.ld-tabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 12px; background: var(--ld-card); border: 1px solid var(--ld-border); }
+.ld-tabs button {
+  display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 10px; border: 0; border-radius: 8px;
+  background: transparent; font-size: 13px; font-weight: 600; color: var(--ld-muted); cursor: pointer;
+}
+.ld-tabs button[aria-selected="true"] { background: hsl(300 76% 52% / .16); color: var(--ld-fg); }
+.ld-tabs .ic { width: 15px; height: 15px; }
+
+/* tela estreita: abas numa linha, botões na outra */
+@media (max-width: 559px) {
+  .ld-tabs, .ld-actions { flex: 1 1 100%; }
+  .ld-tabs button, .ld-actions .ld-btn { flex: 1; justify-content: center; }
+}
+
+/* ---------- colunas ---------- */
+.ld-cols { position: relative; flex: 1; min-height: 0; display: flex; gap: 40px; }
+.ld-col { flex: 1; min-width: 0; min-height: 0; display: flex; flex-direction: column; justify-content: center; }
+.ld-stage[data-view="inf"] .ld-laptop-col, .ld-stage[data-view="biz"] .ld-phone-col { display: none; }
+.ld-phone-col { align-items: center; }
+.ld-label {
+  display: none; align-items: center; gap: 10px; margin-bottom: 14px; font-size: 15px; font-weight: 600;
+  letter-spacing: 3px; text-transform: uppercase; color: var(--ld-muted);
+}
+.ld-label .ic { width: 18px; height: 18px; color: var(--ld-primary); }
+
+/* notebook */
+.ld-laptop { display: flex; flex-direction: column; min-height: 0; }
+.ld-screen-frame {
+  aspect-ratio: 16 / 10; min-height: 0; padding: 8px; background: #1a1a1f; border: 2px solid #3b3842; border-radius: 14px;
+  box-shadow: 0 30px 80px rgba(0,0,0,.55);
+}
+.ld-viewport { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 6px; background: #111; }
+.ld-scaler { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+.ld-base {
+  position: relative; height: 12px; margin: 0 -4%; border-radius: 0 0 14px 14px;
+  background: linear-gradient(180deg, #34313b, #18171c); box-shadow: 0 20px 40px rgba(0,0,0,.45);
+}
+.ld-note { margin: 28px auto 0; max-width: 300px; font-size: 13px; line-height: 1.5; text-align: center; color: var(--ld-muted); }
+.ld-base::before { content: ""; position: absolute; left: 50%; top: 0; width: 14%; height: 5px; transform: translateX(-50%); border-radius: 0 0 8px 8px; background: #0f0e12; }
+
+/* celular */
+.ld-phone {
+  position: relative; height: min(100%, 666px); aspect-ratio: 320 / 666; flex: none; padding: 9px; border-radius: 48px;
+  background: #1b1b1f; border: 2px solid #3a3a40; box-shadow: 0 40px 100px rgba(0,0,0,.6), inset 0 0 0 2px #0b0b0d;
+}
+.ld-screen { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 40px; background: #000; }
+.ld-island { position: absolute; top: 18px; left: 50%; z-index: 30; width: 32%; height: 28px; transform: translateX(-50%); border-radius: 20px; background: #000; }
+
+/* toast de venda (só no desktop; no celular o push do app já mostra a venda) */
+.ld-toast {
+  position: absolute; left: 50%; top: 70px; z-index: 50; display: none; gap: 10px; align-items: center; white-space: nowrap;
+  padding: 12px 20px; border-radius: 12px; border: 1px solid hsl(300 76% 52% / .6); background: #111b1f; font-size: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.5); opacity: 0; transform: translate(-50%, -12px); transition: all .35s ease; pointer-events: none;
+}
+.ld-toast.show { opacity: 1; transform: translate(-50%, 0); }
+.ld-toast .ic { width: 18px; height: 18px; flex: none; color: var(--ld-primary); }
+
+/* ---------- desktop: os dois apps lado a lado ---------- */
+@media (min-aspect-ratio: 7 / 5) {
+  .ld-stage { inset: auto; left: 50%; top: 50%; width: 1400px; height: 800px; padding: 0; gap: 22px; }
+  .ld-tabs, .ld-note { display: none; }
+  .ld-hint, .ld-label { display: flex; }
+  .ld-btn { height: 46px; padding: 0 20px; font-size: 16px; }
+  .ld-btn .ic { width: 18px; height: 18px; }
+  .ld-toast { display: flex; }
+  .ld-stage[data-view] .ld-laptop-col, .ld-stage[data-view] .ld-phone-col { display: flex; }
+  .ld-col { justify-content: flex-start; }
+  .ld-phone-col { flex: none; width: 340px; }
+  .ld-laptop { flex: 1; }
+  .ld-screen-frame { flex: 1; aspect-ratio: auto; padding: 12px; border-radius: 20px; }
+  .ld-phone { width: 320px; height: 666px; aspect-ratio: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}

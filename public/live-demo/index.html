@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="dark">
+<title>ROInfluencer · Live Demo</title>
+<!--
+  Live demo embutida na landing por iframe (seção #demo de src/app/page.tsx).
+  Tudo roda no navegador com dados fictícios, sem rede.
+  Os mocks (assets/js/{icons,data,charts,biz,inf}.js e assets/css/{biz,inf}.css) são cópia de
+  docs/apresentacao-vendas no repositório Roibusiness. Ao mudar lá, copie para cá.
+-->
+<link rel="stylesheet" href="assets/css/live.css">
+<link rel="stylesheet" href="assets/css/biz.css">
+<link rel="stylesheet" href="assets/css/inf.css">
+</head>
+<body>
+<div class="ld-stage" data-view="inf">
+  <div class="ld-bar">
+    <div class="ld-tabs" role="tablist" aria-label="Escolha o app">
+      <button role="tab" data-view="inf" aria-selected="true"><span data-ic="smartphone"></span>Influenciador</button>
+      <button role="tab" data-view="biz" aria-selected="false"><span data-ic="building-2"></span>Empresa</button>
+    </div>
+    <p class="ld-hint">Navegue à vontade nos dois apps. Os dados são fictícios.</p>
+    <div class="ld-actions">
+      <button class="ld-btn primary" data-act="sale"><span data-ic="zap"></span>Simular venda</button>
+      <button class="ld-btn" data-act="auto" aria-pressed="false"><span class="ld-dot"></span>Ao vivo</button>
+    </div>
+  </div>
+  <div class="ld-cols">
+    <div class="ld-col ld-laptop-col">
+      <div class="ld-label"><span data-ic="building-2"></span>Empresa · painel</div>
+      <div class="ld-laptop">
+        <div class="ld-screen-frame"><div class="ld-viewport"><div class="ld-scaler" data-app="biz" data-start="vendas"></div></div></div>
+        <div class="ld-base"></div>
+      </div>
+      <p class="ld-note">O painel da empresa é feito para o computador. Abra esta página no desktop para ver em tamanho real.</p>
+    </div>
+    <div class="ld-col ld-phone-col">
+      <div class="ld-label"><span data-ic="smartphone"></span>Influenciador · app</div>
+      <div class="ld-phone"><div class="ld-island"></div><div class="ld-screen" data-app="inf" data-start="dashboard"></div></div>
+    </div>
+  </div>
+  <div class="ld-toast" role="status"></div>
+</div>
+
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/charts.js"></script>
+<script src="assets/js/biz.js"></script>
+<script src="assets/js/inf.js"></script>
+<script src="assets/js/live.js"></script>
+</body>
+</html>

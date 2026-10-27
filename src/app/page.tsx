@@ -61,6 +61,7 @@ const Index = () => {
           <div className="hidden md:flex items-center gap-8">
             <a href="#problema" className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors">Problema</a>
             <a href="#solucao" className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors">Solução</a>
+            <a href="#demo" className="hidden lg:inline font-body text-sm text-muted-foreground hover:text-foreground transition-colors">Live Demo</a>
             <a href="#funcionalidades" className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors">Funcionalidades</a>
             <a href="#planos" className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors">Planos</a>
             <div className="relative" ref={dropdownRef}>
@@ -218,6 +219,40 @@ const Index = () => {
             ))}
           </motion.div>
         </div>
+      </section>
+
+      {/* Live Demo — painel da empresa e app do influenciador lado a lado (public/live-demo) */}
+      <section id="demo" className="relative py-24 md:py-32 overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="absolute left-1/2 top-2/3 -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[700px] pointer-events-none"
+          style={{ background: "radial-gradient(ellipse at center, hsl(var(--primary) / 0.14) 0%, transparent 65%)" }}
+        />
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="text-center mb-12">
+            <motion.span variants={fadeUp} className="font-body text-sm text-primary uppercase tracking-widest">Live Demo</motion.span>
+            <motion.h2 variants={fadeUp} className="font-heading text-4xl md:text-5xl font-bold mt-4">
+              Uma venda. Dois apps. <span className="text-gradient">Na hora.</span>
+            </motion.h2>
+            <motion.p variants={fadeUp} className="font-body text-lg text-muted-foreground mt-4 max-w-2xl mx-auto">
+              Clique em <span className="text-foreground font-medium">Simular venda</span> e veja a mesma venda chegar no painel da empresa e no app do influenciador. Navegue à vontade: os dados são fictícios.
+            </motion.p>
+          </motion.div>
+        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="relative z-10 mx-auto w-full max-w-[1320px] px-4 md:px-6"
+        >
+          <iframe
+            src="/live-demo/index.html"
+            title="Live demo do ROInfluencer: painel da empresa e app do influenciador"
+            loading="lazy"
+            className="block w-full h-[720px] min-[948px]:h-auto min-[948px]:aspect-[7/4]"
+          />
+        </motion.div>
       </section>
 
       {/* Funcionalidades / Escalabilidade */}
